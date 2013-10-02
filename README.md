@@ -2,7 +2,7 @@
 
 Measures the fleeting passage time.
 
-Much like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Stopwatch.html) and [twitter.util](https://github.com/twitter/util/blob/master/util-core/src/main/scala/com/twitter/util/Stopwatch.scala) without the baggage that comes along with both.
+Much like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Stopwatch.html) and [twitter.util](https://github.com/twitter/util/blob/master/util-core/src/main/scala/com/twitter/util/Stopwatch.scala) Stopwatches without the baggage that comes along with both.
 
 A `Stopwatch` provides a flexible means of tracking the elapsed period of time from some starting point. `scala.concurrent.duration.Duration` does a good job at representing that time but lacks a convenient interface that supports the usecase of tracking time. This library provides a single `lapse.Stopwatch.start()` function which captures the begining of a duration expsoing a function that, when applied, returns a `scala.concurrent.duration.Duration` relative to that starting point. 
 
