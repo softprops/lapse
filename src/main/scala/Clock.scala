@@ -2,7 +2,7 @@ package lapse
 
 /** Exposes a means of obtaining the current time */
 trait Clock {
-  /** @return the current time in millis */
+  /** @return the current time in nanos */
   def read: Long
 }
 
