@@ -8,6 +8,10 @@ A `Stopwatch` provides a flexible means of tracking the elapsed period of time f
 
 A `Stopwatch` requires an implicit `lapse.Clock` to obtain the current time. A `lapse.Clock` defines one method, `read` which should return the current time in nanoseconds according to it's implementation. The default is a `lapse.Clock.SystemClock` which reads time as `System.nanoTime()`
 
+## usage
+
+### start
+
 The `lapse.Stopwatch.start()` method captures the current time and returns a function that, when applied, returns a `scala.concurrent.duration.Duration` relative to that starting point. This is useful with you want to capture lapsed time across multiple operations.
 
 ```scala
@@ -17,6 +21,8 @@ println(elapsed())
 boop()
 println(elapsed())
 ```
+
+### log
 
 The `lapse.Stopwatch.log` method takes two arguments. A log function which takes the lapsed Duration and a function to execute. This is useful with you want to log the lapsed time an operation took as a side effect of an expression.
 
