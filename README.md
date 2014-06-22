@@ -2,20 +2,20 @@
 
 Measures the fleeting passage of time.
 
-Much like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Stopwatch.html) and [twitter.util](https://github.com/twitter/util/blob/master/util-core/src/main/scala/com/twitter/util/Stopwatch.scala) Stopwatches but without the baggage that comes along with both.
+Much like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Stopwatch.html) and [twitter.util](https://github.com/twitter/util/blob/master/util-core/src/main/scala/com/twitter/util/Stopwatch.scala) Stopwatches, but without the baggage that comes along with both.
 
-A `Stopwatch` provides a flexible means of tracking the elapsed period of time from some starting point represented as `scala.concurrent.duration.Durations` which do a good job of representing both a value and unit of time as a unified type. 
+A `Stopwatch` provides a flexible means of tracking the elapsed period of time from some starting point represented as [Durations](http://www.scala-lang.org/api/2.11.0/index.html#scala.concurrent.duration.Duration), which do a good job of representing both a value and unit of time as a unified type. 
 
-A `Stopwatch` requires an implicit `lapse.Clock` to obtain the current time. A `lapse.Clock` defines one method, `read` which should return the current time in nanoseconds according to it's implementation. The default is a `lapse.Clock.SystemClock` which reads time as `System.nanoTime()`
+A `Stopwatch` requires an implicit `lapse.Clock` to obtain the current time. A `lapse.Clock` defines one method, `read` which should return the current time in nanoseconds according to it's implementation. The default `Clock` is a `lapse.Clock.SystemClock` which reads time as `System.nanoTime()`.
 
 ## usage
 
 ### start
 
-The `lapse.Stopwatch.start()` method captures the current time and returns a function that, when applied, returns a `scala.concurrent.duration.Duration` relative to that starting point. This is useful with you want to capture lapsed time across multiple operations.
+The `lapse.Stopwatch#start()` method captures the current time and returns a function that, when applied, returns a `Duration`, relative to that starting point. This is useful if you want to capture lapsed time across multiple operations.
 
 ```scala
-val elapsed = lapse.StopWatch.start()
+val elapsed = lapse.Stopwatch.start()
 bippy()
 println(elapsed())
 boop()
@@ -24,7 +24,7 @@ println(elapsed())
 
 ### log
 
-The `lapse.Stopwatch.log` method takes two arguments. A log function which takes the lapsed Duration and a function to execute. This is useful with you want to log the lapsed time an operation took as a side effect of an expression.
+The `lapse.Stopwatch#log` method takes two arguments: a function which takes the lapsed Duration and a function to execute. This is useful if you want to log the lapsed time an operation took as a side effect of an expression.
 
 ```scala
 val result = Stopwatch.log(println) {
@@ -32,7 +32,7 @@ val result = Stopwatch.log(println) {
 }
 ```
 
-If you can also curry `log` in a way that let's you reuse logging. Below is a contrived example
+You can curry `log` in a way that let's you reuse logging. Below is a contrived example
 of capturing a histogram of durations.
 
 ```scala
