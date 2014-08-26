@@ -2,7 +2,7 @@
 
 Measures the fleeting passage of time.
 
-Much like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Stopwatch.html) and [twitter.util](https://github.com/twitter/util/blob/master/util-core/src/main/scala/com/twitter/util/Stopwatch.scala) Stopwatches, but without the baggage that comes along with both.
+Much like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Stopwatch.html) and [twitter.util](https://github.com/twitter/util/blob/master/util-core/src/main/scala/com/twitter/util/Stopwatch.scala) Stopwatches, but without the everything else that comes along with both.
 
 A `Stopwatch` provides a flexible means of tracking the elapsed period of time from some starting point represented as [Durations](http://www.scala-lang.org/api/2.11.0/index.html#scala.concurrent.duration.Duration), which do a good job of representing both a value and unit of time as a unified type. 
 
@@ -48,12 +48,11 @@ class Histogram {
 }
 
 val histo = new Histogram()
-val laplog = lapse.Stopwatch.log[Int](histo.add)_
+val laplog = lapse.Stopwatch.log[Int](histo.add) _
 
 (1 to 100).foreach(i => laplog(bippy(i)))
 
 histo().foreach(println)
 ```
-
 
 Doug Tangren (softprops) 2013-2014
