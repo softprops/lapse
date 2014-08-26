@@ -4,7 +4,7 @@ Measures the fleeting passage of time.
 
 Much like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Stopwatch.html) and [twitter.util](https://github.com/twitter/util/blob/master/util-core/src/main/scala/com/twitter/util/Stopwatch.scala) Stopwatches, but without the everything else that comes along with both.
 
-A `Stopwatch` provides a flexible means of tracking the elapsed period of time from some starting point represented as [Durations](http://www.scala-lang.org/api/2.11.0/index.html#scala.concurrent.duration.Duration), which do a good job of representing both a value and unit of time as a unified type. 
+A `Stopwatch` defines interfaces for tracking the elapsed passage of time in terms of [FiniteDurations](http://www.scala-lang.org/api/current/index.html#scala.concurrent.duration.FiniteDuration), a type representing amounts of times and their units. 
 
 A `Stopwatch` requires an implicit `lapse.Clock` to obtain the current time. A `lapse.Clock` defines one method, `read` which should return the current time in nanoseconds according to it's implementation. The default `Clock` is a `lapse.Clock.SystemClock` which reads time as `System.nanoTime()`.
 
@@ -24,7 +24,7 @@ println(elapsed())
 
 ### log
 
-The `lapse.Stopwatch#log` method takes two arguments: a function which takes the lapsed Duration and a function to execute. This is useful if you want to log the lapsed time an operation took as a side effect of an expression.
+The `lapse.Stopwatch#log(logger)(fn)` method takes two arguments: a function which takes the lapsed Duration and a function to execute. This is useful if you want to log the lapsed time an operation took as a side effect of an expression.
 
 ```scala
 val result = Stopwatch.log(println) {
@@ -32,7 +32,7 @@ val result = Stopwatch.log(println) {
 }
 ```
 
-You can curry `log` in a way that let's you reuse logging. Below is a contrived example
+You can curry `log(...)` in a way that let's you reuse logging. Below is a contrived example
 of capturing a histogram of durations.
 
 ```scala
