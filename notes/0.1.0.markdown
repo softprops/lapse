@@ -1,0 +1,34 @@
+## initial release
+
+lapse defines a Stopwatch like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Stopwatch.html) and [twitter.util](https://github.com/twitter/util/blob/master/util-core/src/main/scala/com/twitter/util/Stopwatch.scala) Stopwatches, but without the everything else that comes along with both.
+
+Measurements are represented as Scala std library [FiniteDurations](http://www.scala-lang.org/api/current/index.html#scala.concurrent.duration.FiniteDuration)
+
+    val watch = lapse.Stopwatch.start()
+    doSomeWork()
+    watch() // returns a finite duration since the watch was started
+    doSomeWork()
+    watch() // returns a finite duration since the watch was started
+    
+Sometimes you may wish to simply log the elapsed time of a function as a side effect. In these cases you may wish to use `Stopwatch.log`
+
+    val result = lapse.Stopwatch.log({
+      duration => println(s"operation took $duration")
+    }) {
+      expensiveComputation
+    }
+    
+You may also find it useful to curry `Stopwatch#log` to make references to it reusable
+
+    val log = lapse.Stopwatch.log[Int]({
+      duration => println(s"operation took $duration")
+    }) _
+    val result = log(expensiveComputation)
+    val result = log(anotherExpensiveComputation)
+    
+Lastly, lapse defines a `Stopwatch#tupled` interface that returns a tuple the result and elapsed duration
+
+    val (resultOne, elapsedOne) = lapse.Stopwatch.tupled(expensiveOperation)
+    val (resultTwo, explasedTwo) = lapse.Stopwatch.tupled(expensiveOperation2)
+
+See the project [readme](https://github.com/softprops/lapse) for more info.

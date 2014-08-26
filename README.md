@@ -6,13 +6,13 @@ Much like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/goo
 
 A `Stopwatch` defines interfaces for tracking the elapsed passage of time in terms of [FiniteDurations](http://www.scala-lang.org/api/current/index.html#scala.concurrent.duration.FiniteDuration), a type representing amounts of times and their units. 
 
-A `Stopwatch` requires an implicit `lapse.Clock` to obtain the current time. A `lapse.Clock` defines one method, `read` which should return the current time in nanoseconds according to it's implementation. The default `Clock` is a `lapse.Clock.SystemClock` which reads time as `System.nanoTime()`.
+A `Stopwatch` requires an implicit `lapse.Clock` to obtain the current time. A `lapse.Clock` defines one method, `read` which should return the current time in nanoseconds according to it's implementation. The default `Clock` reads time as `System.nanoTime()`.
 
 ## usage
 
 ### start
 
-The `lapse.Stopwatch#start()` method captures the current time and returns a function that, when applied, returns a `Duration`, relative to that starting point. This is useful if you want to capture lapsed time across multiple operations.
+The `lapse.Stopwatch#start()` interface captures the current time and returns a function that, when applied, returns a `Duration`, relative to that starting point. This is useful if you want to capture lapsed time across multiple operations.
 
 ```scala
 val elapsed = lapse.Stopwatch.start()
@@ -24,7 +24,7 @@ println(elapsed())
 
 ### log
 
-The `lapse.Stopwatch#log(logger)(fn)` method takes two arguments: a function which takes the lapsed Duration and a function to execute. This is useful if you want to log the lapsed time an operation took as a side effect of an expression.
+The `lapse.Stopwatch#log(logger)(fn)` interface takes two arguments: a function which takes the lapsed Duration and a function to execute. This is useful if you want to log the lapsed time an operation took as a side effect of an expression.
 
 ```scala
 val result = Stopwatch.log(println) {
@@ -53,6 +53,14 @@ val laplog = lapse.Stopwatch.log[Int](histo.add) _
 (1 to 100).foreach(i => laplog(bippy(i)))
 
 histo().foreach(println)
+```
+
+### tupled
+
+The `lapse.Stopwatch#tupled` interface returns a two element tuple of (result, elapsedDuration)
+
+```scala
+val (result, elapsed) = lapse.Stopwatch.tupled(bippy())
 ```
 
 Doug Tangren (softprops) 2013-2014
