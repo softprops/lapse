@@ -36,12 +36,12 @@ You can curry `log(...)` in a way that let's you reuse logging. Below is a contr
 of capturing a histogram of durations.
 
 ```scala
-import scala.concurrent.duration.Duration
+import scala.concurrent.duration.FiniteDuration
 import scala.collection.mutable.ListBuffer
 
 class Histogram {
-  private val population = ListBuffer.empty[Duration]
-  def add(d: Duration) = population += d
+  private val population = ListBuffer.empty[FiniteDuration]
+  def add(d: FiniteDuration) = population += d
   def apply() = population.groupBy(identity).map {
     case (d, pop) => (d, pop.size)
   }
