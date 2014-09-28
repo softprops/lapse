@@ -1,0 +1,17 @@
+{
+  "organization" : "me.lessis",
+  "name" : "lapse",
+  "version" : "0.1.0",
+  "description" : "Measures the passage of time",
+  "site" : "https://github.com/softprops/lapse/#readme",
+  "tags" : [ "email", "mail", "javamail" ],
+  "docs" : "",
+  "resolvers" : [ "http://dl.bintray.com/content/softprops/maven" ],
+  "dependencies" : [ ],
+  "scalas" : [ "2.10.4", "2.11.0" ],
+  "licenses" : [ {
+    "name" : "MIT",
+    "url" : "https://github.com/softprops/lapse/blob/0.1.0/LICENSE"
+  } ],
+  "sbt" : false
+}
