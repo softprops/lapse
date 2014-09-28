@@ -4,7 +4,7 @@ Measures the fleeting passage of time.
 
 Much like [guava](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Stopwatch.html) and [twitter.util](https://github.com/twitter/util/blob/master/util-core/src/main/scala/com/twitter/util/Stopwatch.scala) Stopwatches, but without the everything else that comes along with both.
 
-A `Stopwatch` defines interfaces for tracking the elapsed passage of time in terms of [FiniteDurations](http://www.scala-lang.org/api/current/index.html#scala.concurrent.duration.FiniteDuration), a type representing amounts of times and their units. 
+A `Stopwatch` defines interfaces for tracking the elapsed passage of time in terms of [FiniteDurations](http://www.scala-lang.org/api/current/index.html#scala.concurrent.duration.FiniteDuration), a type representing a quanity of time and its unit of measurement.
 
 A `Stopwatch` requires an implicit `lapse.Clock` to obtain the current time. A `lapse.Clock` defines one method, `read` which should return the current time in nanoseconds according to it's implementation. The default `Clock` reads time as `System.nanoTime()`.
 
@@ -12,7 +12,7 @@ A `Stopwatch` requires an implicit `lapse.Clock` to obtain the current time. A `
 
 ### start
 
-The `lapse.Stopwatch#start()` interface captures the current time and returns a function that, when applied, returns a `Duration`, relative to that starting point. This is useful if you want to capture lapsed time across multiple operations.
+The `lapse.Stopwatch#start()` interface captures the current time and exports a function that, when applied, returns a `FiniteDuration`, relative to that starting point. This is useful if you want to capture lapsed time across multiple operations.
 
 ```scala
 val elapsed = lapse.Stopwatch.start()
@@ -24,7 +24,7 @@ println(elapsed())
 
 ### log
 
-The `lapse.Stopwatch#log(logger)(fn)` interface takes two arguments: a function which takes the lapsed Duration and a function to execute. This is useful if you want to log the lapsed time an operation took as a side effect of an expression.
+The `lapse.Stopwatch#log(logger)(fn)` interface takes two arguments: 1) a logging function which the lapsed Duration is handled after a timing and 2) a function to execute. This is useful if you want to log the lapsed time an operation took as a side effect of an expression.
 
 ```scala
 val result = Stopwatch.log(println) {
