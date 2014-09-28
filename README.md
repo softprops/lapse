@@ -24,7 +24,7 @@ println(elapsed())
 
 ### log
 
-The `lapse.Stopwatch#log(logger)(fn)` interface takes two arguments: 1) a logging function which the lapsed Duration is handled after a timing and 2) a function to execute. This is useful if you want to log the lapsed time an operation took as a side effect of an expression.
+The `lapse.Stopwatch#log(logger)(fn)` interface takes two arguments: 1) a logging function which the elapsed Duration is handed to after a timing and 2) a function to execute. This is useful if you want to log the lapsed time an operation took as a side effect of an expression.
 
 ```scala
 val result = Stopwatch.log(println) {
