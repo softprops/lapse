@@ -57,7 +57,8 @@ histo().foreach(println)
 
 ### tupled
 
-The `lapse.Stopwatch#tupled` interface returns a two element tuple of (result, elapsedDuration)
+The `lapse.Stopwatch#tupled` interface returns a two element tuple of (result, elapsedDuration). This interface is useful for side effect free
+tracking of lapsed time and the value of the expression being timed.
 
 ```scala
 val (result, elapsed) = lapse.Stopwatch.tupled(bippy())
