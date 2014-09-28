@@ -6,7 +6,7 @@ version := "0.1.0"
 
 description := "Measures the passage of time"
 
-crossScalaVersions := Seq("2.10.4", "2.11.0")
+crossScalaVersions := Seq("2.10.4", "2.11.2")
 
 scalaVersion := crossScalaVersions.value.head
 
