@@ -8,6 +8,26 @@ A `Stopwatch` defines interfaces for tracking the elapsed passage of time in ter
 
 A `Stopwatch` requires an implicit `lapse.Clock` to obtain the current time. A `lapse.Clock` defines one method, `read` which should return the current time in nanoseconds according to it's implementation. The default `Clock` reads time as `System.nanoTime()`.
 
+## install
+
+Via the copy and paste method
+
+```scala
+resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven"
+
+libraryDependencies += "me.lessis" %% "lapse" % "0.1.0"
+```
+
+Via [a more civilized method](https://github.com/softprops/ls#readme) which will do the same without all the manual work.
+
+    > ls-install lapse
+                
+_Note_ If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
+                                        
+```scala
+resolvers += bintray.Opts.resolver.repo("softprops", "maven")
+```
+
 ## usage
 
 ### start
